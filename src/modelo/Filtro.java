@@ -38,5 +38,48 @@ public class Filtro {
         this.marca = marca;
         this.stock = stock;
         this.excistencia = excistencia;
-    }    
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public boolean isExcistencia() {
+        return excistencia;
+    }
+
+    public void setExcistencia(boolean excistencia) {
+        this.excistencia = excistencia;
+    }
+
+    
+    
 }
