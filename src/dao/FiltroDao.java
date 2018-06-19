@@ -8,7 +8,9 @@ package dao;
 import conexion.Conexion;
 import interfaces.metodos;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -85,20 +87,70 @@ public class FiltroDao implements metodos<Filtro> {
             if (ps.executeUpdate()>0){
                 return true;
             }
-            
-        
+        }
+        catch(SQLException ex)
+        {
+        System.out.println(ex.getMessage());
+           Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE,null,ex);
+        }finally {
+            con.cerrarConexion();
         }
         
+        return false;   
     }
 
     @Override
     public Filtro read(Object key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        Filtro f = null;
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try
+        {
+            ps = con.getCnx().prepareStatement(SQL_READ);
+            ps.setString(1, key.toString());
+            
+            rs = ps.executeQuery();
+            
+            while (rs.next()){
+                f = new Filtro(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getBoolean(5));
+            }
+            rs.close();        
+        }
+        catch(SQLException ex)
+        {
+        System.out.println(ex.getMessage());
+           Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE,null,ex);
+        }finally {
+            con.cerrarConexion();
+        }
+        return f;
     }
 
     @Override
     public ArrayList<Filtro> readAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        ArrayList<Filtro> all = new ArrayList();
+        Statement s;
+        ResultSet rs;
+        
+        try
+        {
+            s = con.getCnx().prepareStatement(SQL_READALL);
+            rs = s.executeQuery(SQL_READALL);
+            
+            while (rs.next())
+            {
+                all.add(new Filtro(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getBoolean(5)));
+            }
+            rs.close();
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE,null,ex);
+        }
+        return all;
     }
     
 }
