@@ -78,8 +78,6 @@ public class Filtro {
 
     public void setExcistencia(boolean excistencia) {
         this.excistencia = excistencia;
-    }
-
-    
+    }    
     
 }

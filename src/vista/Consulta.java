@@ -5,7 +5,9 @@
  */
 package vista;
 
+import dao.FiltroDao;
 import java.awt.Container;
+import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -13,9 +15,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import modelo.Filtro;
 
 /**
  *
@@ -77,4 +81,90 @@ public class Consulta extends JFrame{
         lblStock.setBounds(10, 100, ANCHOC, ALTOC);
         lblExistencia.setBounds(10, 140, ANCHOC, ALTOC);
     }
+
+    public final void formulario() {
+        //elementos
+        codigo = new JTextField();
+        marca = new JComboBox();
+        stock = new JTextField();
+        si = new JRadioButton("si",true);
+        no = new JRadioButton("no");
+        resultados = new JTable();
+        buscar = new JButton("Buscar");
+        insertar = new JButton("Insertar");
+        eliminar = new JButton("Eliminar");
+        actualizar = new JButton("Actualizar");
+        limpiar = new JButton("Limpiar");
+        
+        table = new JPanel();
+        //agregando elementos al combox marca
+        marca.addItem("FRAM");
+        marca.addItem("WIX");
+        marca.addItem("Luber Finer");
+        marca.addItem("OSK");
+        //agregando los radio a un grupo
+        existencia = new ButtonGroup();
+        existencia.add(si);
+        existencia.add(no);
+        
+        codigo.setBounds(140,10,ANCHOC,ALTOC);
+        marca.setBounds(140,60,ANCHOC,ALTOC);
+        stock.setBounds(140, 100, ANCHOC, ALTOC);
+        si.setBounds(140,140,ANCHOC,ALTOC);
+        no.setBounds(210, 140, ANCHOC, ALTOC);
+        
+        buscar.setBounds(100,10,ANCHOC,ALTOC);
+        insertar.setBounds(10,120,ANCHOC,ALTOC);
+        actualizar.setBounds(150,210,ANCHOC,ALTOC);
+        eliminar.setBounds(300,210,ANCHOC,ALTOC);
+        limpiar.setBounds(450,210,ANCHOC,ALTOC);
+        resultados = new JTable();
+        table.setBounds(10,250,500,200);
+        table.add(new JScrollPane(resultados));   
+    }
+
+    public void llenarTabla() {
+        //coclocamos el tipo de dato que tendra nuestra columna
+        //si es un dato booleano aparecera un checkbox en el JTable
+        tm = new DefaultTableModel()
+        {
+            public Class<?> getColumnClass(int column){
+                switch(column)
+                {
+                    case 0:
+                        return String.class;
+                    case 1:
+                        return String.class;
+                    case 2:
+                        return String.class;
+                    default:
+                        return Boolean.class;
+                
+                }
+            }
+        };
+        //agregamos las columnas que se mostraran con sus respectivos nombres
+        tm.addColumn("Codigo");
+        tm.addColumn("Marca");
+        tm.addColumn("Stock");
+        tm.addColumn("Stock en Sucursal");
+        //Realizamos nuestra consulta a nuestra base de datos por medio de metodo redall
+        FiltroDao fd = new FiltroDao();
+        ArrayList<Filtro> filtros = fd.readAll();
+        //Agregamos el resultado a nuestro JTable
+        for(Filtro fi:filtros)
+        {
+            tm.addRow(new Object[]{fi.getCodigo(),fi.getMarca(),fi.getStock(),fi.isExcistencia()});
+        }
+        //le agregamos el modelo a nuestra tabla
+        resultados.setModel(tm);   
+    }
+    
+    public void eventos(){
+        //Insertar
+        insertar.addActionListener(new ActionListener(){});
+    
+    }
+    
+    
 }
