@@ -48,7 +48,7 @@ public class Conexion {
     private void cargarCredenciales() {
        user = "root";
        pass = "";
-       driver = "com.mysql.jdbc.Drive";
+       driver = "com.mysql.jdbc.Driver";
        url = "jdbc:mysql://localhost/filtros";
     }
     

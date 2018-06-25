@@ -25,8 +25,8 @@ public class FiltroDao implements metodos<Filtro> {
     private static final String SQL_INSERT = "INSERT INTO filtros_aceites (codFiltro,marca,stock,existencia) VALUES (?,?,?,?)";
     private static final String SQL_UPDATE = "UPDATE filtros_aceite SET marca = ?, stock = ? , existencia = ? WHERE codFiltro = ?";
     private static final String SQL_DELETE = "DELETE FROM  filtros_aceite WHERE codFiltros = ?";
-    private static final String SQL_READ = "SELECT * FROM filstros_aceite WHERE codFiltros = ?";
-    private static final String SQL_READALL = "SELECT * FROM filstros_aceite";
+    private static final String SQL_READ = "SELECT * FROM filtros_aceite WHERE codFiltros = ?";
+    private static final String SQL_READALL = "SELECT * FROM filtros_aceite";
     private static final Conexion con = Conexion.conectar();
     
     
