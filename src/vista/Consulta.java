@@ -34,7 +34,7 @@ public class Consulta extends JFrame{
     public JTextField codigo, decripcion, stock;
     public JComboBox marca;
     
-    ButtonGroup existencia = new ButtonGroup();
+    public ButtonGroup existencia = new ButtonGroup();
     public JRadioButton no;
     public JRadioButton si;
     public JTable resultados;
@@ -42,6 +42,8 @@ public class Consulta extends JFrame{
     public JPanel table;
     
     public JButton buscar, eliminar, insertar, limpiar, actualizar;
+    
+    public Container container = getContentPane();
     
     private static final int ANCHOC = 130, ALTOC = 30;
     
@@ -54,7 +56,6 @@ public class Consulta extends JFrame{
         agregarLabels();
         formulario();
         llenarTabla();
-        Container container = getContentPane();
         container.add(lblCodigo);
         container.add(lblMarca);
         container.add(lblStock);
@@ -90,7 +91,7 @@ public class Consulta extends JFrame{
         codigo = new JTextField();
         marca = new JComboBox();
         stock = new JTextField();
-        si = new JRadioButton("si",true);
+        si = new JRadioButton("si");
         no = new JRadioButton("no");
         resultados = new JTable();
         buscar = new JButton("Buscar");
@@ -106,7 +107,7 @@ public class Consulta extends JFrame{
         marca.addItem("Luber Finer");
         marca.addItem("OSK");
         //agregando los radio a un grupo
-        existencia = new ButtonGroup();
+        
         existencia.add(si);
         existencia.add(no);
         
@@ -114,10 +115,10 @@ public class Consulta extends JFrame{
         marca.setBounds(140,60,ANCHOC,ALTOC);
         stock.setBounds(140, 100, ANCHOC, ALTOC);
         si.setBounds(140,140,ANCHOC,ALTOC);
-        no.setBounds(210, 140, ANCHOC, ALTOC);
+        no.setBounds(180, 140, ANCHOC, ALTOC);
         
-        buscar.setBounds(100,10,ANCHOC,ALTOC);
-        insertar.setBounds(10,120,ANCHOC,ALTOC);
+        buscar.setBounds(300,10,ANCHOC,ALTOC);
+        insertar.setBounds(10,210,ANCHOC,ALTOC);
         actualizar.setBounds(150,210,ANCHOC,ALTOC);
         eliminar.setBounds(300,210,ANCHOC,ALTOC);
         limpiar.setBounds(450,210,ANCHOC,ALTOC);
